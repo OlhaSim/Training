@@ -83,13 +83,19 @@ public class Tasks {
     }
 
 
-
+// TODO
     public static Person[] sortPeopleArray (Person[] arr) {
         return arr;
     }
 
 
-
+    /**
+     * This method takes an ArrayList and sorts the "Person"-objects in it descending by their date of birth. If dates are equal,
+     * object are sorted ascended by their last names. For the sorting Comparator is used.
+     * compare(): p1 < p2 => -1 (p1 should appear first)
+     *            p1 > p2 => 1 (p1 should appear second)
+     *            p1 == p2 => 0
+     */
     public static void sortPeopleList (ArrayList<Person> list) {
 
         list.sort(new Comparator<Person>() {
@@ -112,6 +118,19 @@ public class Tasks {
                 Comparator.comparing((Person p) -> p.getBirthDate().getYear()).reversed()
                         .thenComparing(Person::getLastName)
         );
+    }
+
+
+    /**
+     * This method removes even numbers from ArrayList. The list is traversed from the end, bcs otherwise there is a risk of skipping
+     * elements!!
+     */
+    public static void removeEvenNumbers (ArrayList<Integer> list) {
+        for (int i = list.size() - 1; i >= 0; i--) {
+            if (i % 2 == 0) {
+                list.remove(i);
+            }
+        }
     }
 
 
@@ -164,6 +183,17 @@ public class Tasks {
 
         for (Person p : peopleList) {
             System.out.println(p.getFullInfo());
+        }
+
+
+        //Test removeEvenNumbers()
+        ArrayList<Integer> numbers = new ArrayList<>();
+        for (int i = 1; i <= 10; i++) {
+            numbers.add(i);
+        }
+        removeEvenNumbers(numbers);
+        for (int i = 0; i < numbers.size() - 1; i++) {
+            System.out.println(numbers.get(i));
         }
 
 
