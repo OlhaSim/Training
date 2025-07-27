@@ -34,4 +34,8 @@ public class Person {
     public Date getBirthDate() {
         return birthDate;
     }
+
+    public String getFullInfo() {
+        return firstName + " " + lastName + ", " + birthDate.toString();
+    }
 }

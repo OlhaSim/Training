@@ -1,5 +1,6 @@
 package com;
 
+import com.Objects.Date;
 import com.Objects.Person;
 import java.util.*;
 
@@ -89,8 +90,28 @@ public class Tasks {
 
 
 
-    public static ArrayList<Person> sortPeopleList (ArrayList<Person> list) {
-        return list;
+    public static void sortPeopleList (ArrayList<Person> list) {
+
+        list.sort(new Comparator<Person>() {
+            @Override
+            public int compare(Person p1, Person p2) {
+                int yearCompare = Integer.compare(p2.getBirthDate().getYear(), p1.getBirthDate().getYear());
+                if (yearCompare != 0) {
+                    return yearCompare;
+                }
+                return p1.getLastName().compareTo(p2.getLastName());
+            }
+        });
+    }
+
+    /**
+     * Optimized version of sortPeopleList using lambda
+     */
+    public static void sortPeopleListOptimized(ArrayList<Person> list) {
+        list.sort(
+                Comparator.comparing((Person p) -> p.getBirthDate().getYear()).reversed()
+                        .thenComparing(Person::getLastName)
+        );
     }
 
 
@@ -99,10 +120,13 @@ public class Tasks {
      * All methods and algorithms are tested in main() method
      */
     public static void main(String[] args) {
+
+
         // Test flipArray
         int[] arr = {1, 2, 3, 4};
         flipArray(arr);
         System.out.println(Arrays.toString(arr));
+
 
         // Test flipList
         List<Integer> list = new ArrayList<>();
@@ -113,11 +137,36 @@ public class Tasks {
         flipList(list);
         System.out.println(list);
 
+
         // Test countUniqueWordsInText and it's improved version
         String poem = "While I nodded, nearly napping, suddenly there came a tapping, " +
                       "as of some one gently rapping, rapping at my chamber door";
         System.out.println(countUniqueWordsInText(poem));
         System.out.println(improvedCountUniqueWordsInText(poem));
+
+
+        //Test sortPeopleList
+        ArrayList<Person> peopleList = new ArrayList<>();
+
+        peopleList.add(new Person("Tom", "Hall", new Date(11, 12, 1999)));
+        peopleList.add(new Person("Marry", "Sue", new Date(3, 3, 2005)));
+        peopleList.add(new Person("Mildred", "Miller", new Date(8, 1, 1998)));
+        peopleList.add(new Person("David", "Loom", new Date(7, 4, 1948)));
+        peopleList.add(new Person("Tom", "Mall", new Date(11, 12, 1999)));
+
+        sortPeopleList(peopleList);
+
+        for (Person p : peopleList) {
+            System.out.println(p.getFullInfo());
+        }
+
+        sortPeopleListOptimized(peopleList);
+
+        for (Person p : peopleList) {
+            System.out.println(p.getFullInfo());
+        }
+
+
 
     }
 }
