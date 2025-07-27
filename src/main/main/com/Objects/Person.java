@@ -1,4 +1,4 @@
-package Objects;
+package com.Objects;
 
 /**
  * Class Objects.Person is created to test the method, which sorts the list of people descended by year of birth

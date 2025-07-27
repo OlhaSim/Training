@@ -1,5 +1,8 @@
+package com;
+
+import com.Objects.Person;
 import java.util.*;
-import Objects.*;
+
 /**
  * This class is for simple tasks, which include operations with arrays and ArrayLists
  */
